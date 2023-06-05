@@ -19,6 +19,8 @@ public class Main {
 	private static final String PROJECT_NAME = "BOOKKEEPER"; 
 	private static final String OUTPUTS_FOLDER = "outputs/"; // Directory dei risultati
 	
+	private static final String ERROR_DATASET_CREATION = "Errore nella costruzione del dataset: %s";
+	
 	private static void initOutputsFolder() throws IOException {
 		Path path = Paths.get(OUTPUTS_FOLDER);
 		if (!Files.exists(path)) // Se non esiste, crea la cartella dei risultati
@@ -44,13 +46,13 @@ public class Main {
 			DatasetBuilder datasetBuilder = new DatasetBuilder(PROJECT_NAME, OUTPUTS_FOLDER);
 			datasetBuilder.build();
 		} catch (GithubTokenException e) {
-			LOGGER.log(Level.SEVERE, String.format("Errore nella costruzione del dataset: %s", e.getMessage()));
+			LOGGER.log(Level.SEVERE, String.format(ERROR_DATASET_CREATION, e.getMessage()));
 			e.printStackTrace();
 		} catch (GithubOwnerException e) {
-			LOGGER.log(Level.SEVERE, String.format("Errore nella costruzione del dataset: %s", e.getMessage()));
+			LOGGER.log(Level.SEVERE, String.format(ERROR_DATASET_CREATION, e.getMessage()));
 			e.printStackTrace();	
 		} catch (RateLimitExceededGithubAPIException e) {
-			LOGGER.log(Level.SEVERE, String.format("Errore nella costruzione del dataset: %s", e.getMessage()));
+			LOGGER.log(Level.SEVERE, String.format(ERROR_DATASET_CREATION, e.getMessage()));
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, String.format("Errore inizializzazione dei file di output: %s", e.getMessage()));
 		} catch (Exception e) {

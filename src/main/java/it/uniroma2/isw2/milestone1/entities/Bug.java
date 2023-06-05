@@ -12,6 +12,8 @@ import com.google.gson.JsonObject;
 
 public class Bug {
 
+	private static final String RELEASE_DATE = "releaseDate";
+	
 	private String key;
 	private Version fv;
 	private Version ov;
@@ -129,7 +131,7 @@ public class Bug {
 				continue;
 						
 			String version = jsonFixVersion.get("name").getAsString();
-			LocalDateTime date = LocalDate.parse(jsonFixVersion.get("releaseDate").getAsString()).atStartOfDay();
+			LocalDateTime date = LocalDate.parse(jsonFixVersion.get(RELEASE_DATE).getAsString()).atStartOfDay();
 			
 			if (fixDate == null || date.isAfter(fixDate)) {
 				fixVersion = version;
@@ -146,7 +148,7 @@ public class Bug {
 	}
 	
 	private static boolean missingFields(JsonObject jsonFixVersion) {		
-		return jsonFixVersion.get("name") == null || jsonFixVersion.get("name").getAsString() == null || jsonFixVersion.get("releaseDate") == null || jsonFixVersion.get("releaseDate").getAsString() == null;
+		return jsonFixVersion.get("name") == null || jsonFixVersion.get("name").getAsString() == null || jsonFixVersion.get(RELEASE_DATE) == null || jsonFixVersion.get(RELEASE_DATE).getAsString() == null;
 	}
 
 	private static Version extractOpenVersion(String openDate, List<Version> versions) {

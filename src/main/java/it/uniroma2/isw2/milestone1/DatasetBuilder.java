@@ -75,7 +75,7 @@ public class DatasetBuilder {
 		this.proportion();
 		
 		/* Costruzione dell'insieme dei file toccati da ciascun bug */
-		LOGGER.log(Level.INFO, "Costruzione dell'insieme dei file toccati da ciascun bug");
+		LOGGER.log(Level.INFO, "Costruzione dell\'insieme dei file toccati da ciascun bug");
 		this.setInfectedFiles();
 		
 		LOGGER.log(Level.INFO, "Considera soltanto la prima metà delle versioni ({0})", targetId);

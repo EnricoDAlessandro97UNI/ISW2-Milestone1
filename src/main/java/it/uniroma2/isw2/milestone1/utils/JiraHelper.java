@@ -56,7 +56,8 @@ public class JiraHelper {
 		
 		for (Version v : versions) {
 			v.setId(versionId++);
-			LOGGER.log(Level.INFO, v.toString());
+			if (v != null)
+				LOGGER.log(Level.INFO, v.toString());
 		}
 		
 		return versions;

@@ -23,6 +23,10 @@ public class RestHelper {
 	
 	private static final String RATE_LIMIT_EXCEEDED = "API rate limit exceeded for user ID";
 	
+	private RestHelper() {
+		
+	}
+	
 	public static JsonObject getJSONObject(String url) throws IOException {
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder().url(url).build();
@@ -55,7 +59,7 @@ public class RestHelper {
 		if (Files.exists(cachePath)) {
 			return Files.readString(cachePath);
 		} else {
-			LOGGER.log(Level.WARNING, "Risorsa " + cache + " non trovata nella cache locale");
+			LOGGER.log(Level.WARNING, String.format("Risorsa %s non trovata nella cache locale", cache));
 			OkHttpClient client = new OkHttpClient();
 			Request req = new Request.Builder().url(url).header("Authorization", "token " + token).build();
 			Response res = client.newCall(req).execute();

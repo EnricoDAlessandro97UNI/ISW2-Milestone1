@@ -83,9 +83,7 @@ public class GitHelper {
 		do {
 			String cache = String.format(CACHE_COMMIT_LIST, this.projectName, index);
 			String remote = String.format(REMOTE_COMMIT_LIST, this.repoOwner, this.projectName, index);
-			
-//			LOGGER.log(Level.INFO, remote);
-			
+						
 			JsonArray jsonCommits = RestHelper.getJSONArray(remote, this.token, cache);
 			results = jsonCommits.size();
 			
@@ -106,9 +104,7 @@ public class GitHelper {
 		
 		String cache = String.format(CACHE_COMMIT_INFO, this.projectName, sha);
 		String remote = String.format(REMOTE_COMMIT_INFO, this.repoOwner, this.projectName, sha);
-		
-//		LOGGER.log(Level.INFO, remote);
-		
+				
 		// Recupera il commit in base allo SHA specificato e prende le informazioni relative al commit e all'autore del commit stesso
 		JsonObject jsonResponse = RestHelper.getJSONObject(remote, this.token, cache);
 		JsonObject jsonCommit = jsonResponse.get("commit").getAsJsonObject();
