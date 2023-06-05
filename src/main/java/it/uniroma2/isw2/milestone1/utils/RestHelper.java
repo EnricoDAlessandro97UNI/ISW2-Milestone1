@@ -5,8 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,9 +16,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class RestHelper {
-	
-	private static final Logger LOGGER = Logger.getLogger(RestHelper.class.getName());
-	
+		
 	private static final String RATE_LIMIT_EXCEEDED = "API rate limit exceeded for user ID";
 	
 	private RestHelper() {
@@ -59,8 +55,6 @@ public class RestHelper {
 		if (Files.exists(cachePath)) {
 			return Files.readString(cachePath);
 		} else {
-			if (cache != null && !cache.isEmpty())
-				LOGGER.log(Level.WARNING, String.format("Risorsa %s non trovata nella cache locale", cache));
 			OkHttpClient client = new OkHttpClient();
 			Request req = new Request.Builder().url(url).header("Authorization", "token " + token).build();
 			Response res = client.newCall(req).execute();
