@@ -59,8 +59,8 @@ public class RestHelper {
 		if (Files.exists(cachePath)) {
 			return Files.readString(cachePath);
 		} else {
-			if (cache != null)
-				LOGGER.log(Level.WARNING, String.format("Risorsa %s non trovata nella cache locale", cache));
+			if (cache != null && !cache.isEmpty())
+				LOGGER.log(Level.WARNING, "Risorsa %s non trovata nella cache locale", cache);
 			OkHttpClient client = new OkHttpClient();
 			Request req = new Request.Builder().url(url).header("Authorization", "token " + token).build();
 			Response res = client.newCall(req).execute();
